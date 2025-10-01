@@ -1,0 +1,16 @@
+projetoUnity/[Ll]ibrary/
+projetoUnity/[Tt]emp/
+projetoUnity/[Oo]bj/
+projetoUnity/[Bb]uild/
+projetoUnity/[Bb]uilds/
+projetoUnity/[Ll]ogs/
+projetoUnity/UserSettings/
+projetoUnity/MemoryCaptures/
+projetoUnity/DerivedDataCache/
+projetoUnity/.vs/
+projetoUnity/.vscode/
+*.csproj
+*.sln
+*.user
+.DS_Store
+Thumbs.db
