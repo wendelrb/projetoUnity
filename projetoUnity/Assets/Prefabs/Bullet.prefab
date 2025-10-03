@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8039222123336767969}
   - component: {fileID: 7574341791767394568}
   - component: {fileID: 5091731380685919123}
-  - component: {fileID: 1644934734078819289}
   - component: {fileID: 4139869232242820694}
   m_Layer: 0
   m_Name: Bullet
@@ -120,20 +119,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1644934734078819289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1301853315878248055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaf34201f60d4be4483a849134dfeee7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Bullet
-  damage: 1
-  lifeTime: 2
 --- !u!58 &4139869232242820694
 CircleCollider2D:
   m_ObjectHideFlags: 0

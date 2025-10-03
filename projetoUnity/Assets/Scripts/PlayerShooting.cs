@@ -1,23 +1,17 @@
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 public class PlayerShooting : MonoBehaviour
 {
-    [Header("Configuração do Tiro")]
-    public GameObject bulletPrefab;   // Prefab da bala
-    public Transform firePoint;       // Ponto de onde sai o tiro (o eixo X do FirePoint deve apontar para o mouse)
-    public float bulletSpeed = 10f;   // Velocidade da bala
+    public GameObject bulletPrefab;   // Prefab do projétil
+    public Transform firePoint;       // Objeto que aponta para o mouse
+    public float bulletSpeed = 10f;
+    public float muzzleOffset = 0.25f; // distância extra à frente do cano
 
-    [Header("Som do Tiro")]
-    public AudioClip shootSFX;        // Som do disparo
-    private AudioSource audioSource;  // Para tocar o som
+    Camera cam;
 
-    private Collider2D playerCollider; // referência ao colisor do Player
-
-    void Awake()
+    private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
-        playerCollider = GetComponent<Collider2D>(); // pega o collider do Player
+        cam = Camera.main;
     }
 
     void Update()
@@ -30,27 +24,23 @@ public class PlayerShooting : MonoBehaviour
 
     void Shoot()
     {
-        if (bulletPrefab == null || firePoint == null) return;
+        // Direção até o mouse
+        Vector3 mouseWorld = cam.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 dir = ((Vector2)(mouseWorld - firePoint.position)).normalized;
 
-        // Cria a bala na posição e rotação do firePoint
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        // Posição com offset para fora do Player
+        Vector3 spawnPos = firePoint.position + (Vector3)(dir * muzzleOffset);
+        spawnPos.z = 0;
 
-        // Aplica velocidade na direção do eixo X do firePoint (MouseAim já cuida de rotacionar)
+        // Rotação da bala na direção do tiro
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        Quaternion rot = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        // Instancia a bala
+        GameObject bullet = Instantiate(bulletPrefab, spawnPos, rot);
+
+        // Dá velocidade
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        if (rb != null)
-        {
-            rb.linearVelocity = firePoint.right * bulletSpeed;
-        }
-
-        // ⚡ Ignora colisão entre a bala e o Player
-        Collider2D bulletCol = bullet.GetComponent<Collider2D>();
-        if (playerCollider != null && bulletCol != null)
-        {
-            Physics2D.IgnoreCollision(bulletCol, playerCollider);
-        }
-
-        // Toca som de disparo
-        if (shootSFX != null)
-            audioSource.PlayOneShot(shootSFX);
+        rb.linearVelocity = dir * bulletSpeed;
     }
 }
