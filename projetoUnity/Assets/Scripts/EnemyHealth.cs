@@ -3,28 +3,29 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [Header("Configuração de Vida")]
-    public int maxHp = 3;   // vida máxima do inimigo
-    private int hp;
+    public int maxHealth = 3;
+    private int currentHealth;
 
-    void Start()
+    private void Awake()
     {
-        hp = maxHp;
+        currentHealth = maxHealth;
     }
 
     public void TakeDamage(int amount)
     {
-        hp -= amount;
-        Debug.Log($"{name} levou {amount} de dano! Vida = {hp}");
+        currentHealth -= amount;
+        Debug.Log(gameObject.name + " tomou " + amount + " de dano. Vida atual: " + currentHealth);
 
-        if (hp <= 0)
+        if (currentHealth <= 0)
         {
             Die();
         }
     }
 
-    void Die()
+    private void Die()
     {
-        Debug.Log($"{name} morreu!");
-        Destroy(gameObject); // inimigo desaparece
+        // Aqui você pode adicionar animação, drop, efeitos etc.
+        Debug.Log(gameObject.name + " morreu!");
+        Destroy(gameObject);
     }
 }

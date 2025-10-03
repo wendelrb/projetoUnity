@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float lifeTime = 2f;
+    [Header("Configuração do Projétil")]
     public int damage = 1;
+    public float lifeTime = 2f;
 
     private void Start()
     {
@@ -12,19 +13,46 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Se colidir com inimigo → aplica dano
-        EnemyHealth enemy = other.GetComponent<EnemyHealth>();
+        // Com a Matrix configurada, só Enemy vai chegar aqui
+        EnemyHealth enemy = other.GetComponentInParent<EnemyHealth>();
         if (enemy != null)
         {
             enemy.TakeDamage(damage);
             Destroy(gameObject);
-            return;
         }
+        // Qualquer outra coisa (Player/Chão) nem colide por causa da Matrix
+    }
+}
 
-        // Se colidir com parede (Environment), some
-        if (other.CompareTag("Environment"))
+
+
+
+
+/*
+FUNFANDO
+
+
+using UnityEngine;
+
+public class Bullet : MonoBehaviour
+{
+    public int damage = 1;       // Dano que a bala causa
+    public float lifeTime = 2f;  // Tempo até sumir sozinho
+
+    private void Start()
+    {
+        Destroy(gameObject, lifeTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // Se colidir com inimigo
+        EnemyHealth enemy = other.GetComponent<EnemyHealth>();
+        if (enemy != null)
         {
-            Destroy(gameObject);
+            enemy.TakeDamage(damage);
+            Destroy(gameObject); // bala desaparece ao atingir inimigo
         }
     }
 }
+*/
