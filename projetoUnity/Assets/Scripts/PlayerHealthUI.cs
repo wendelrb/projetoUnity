@@ -3,18 +3,27 @@ using UnityEngine.UI;
 
 public class PlayerHealthUI : MonoBehaviour
 {
-    public Slider healthSlider;
-    private PlayerHealth playerHealth;
+    public static PlayerHealthUI Instance;
 
-    void Start()
+    [SerializeField] private Slider healthSlider;
+
+    private void Awake()
     {
-        playerHealth = FindObjectOfType<PlayerHealth>();
-        healthSlider.maxValue = playerHealth.maxHp;
-        healthSlider.value = playerHealth.maxHp;
+        if (Instance == null)
+            Instance = this;
+          
+        else
+            Destroy(gameObject);
     }
 
-    void Update()
+    public void InitHealthBar(int max)
     {
-        healthSlider.value = playerHealth.CurrentHp;
+        healthSlider.maxValue = max;
+        healthSlider.value = max;
+    }
+
+    public void UpdateHealthBar(int current, int max)
+    {
+        healthSlider.value = current;
     }
 }
