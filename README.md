@@ -21,7 +21,7 @@ Pedro Sena Modernel:
 - Barra de vida no canto superior esquerdo da tela.
 
 
-Wendel Barbaro 
+Wendel Barbaro: 
 
 - Player com movimentação e pulo
 
