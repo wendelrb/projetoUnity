@@ -19,3 +19,14 @@ Pedro Sena Modernel:
 - Sistema de vida do jogador.
 
 - Barra de vida no canto superior esquerdo da tela.
+
+
+Wendel Barbaro 
+
+- Player com movimentação e pulo
+
+- Detecção de colisão com o chão via Tags
+
+- Física utilizando Rigidbody2D
+
+- Estrutura inicial de cena (chão e player configurados)
