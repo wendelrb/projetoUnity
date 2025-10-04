@@ -23,9 +23,15 @@ public class EnemyHealth : MonoBehaviour
     }
 
     private void Die()
-    {
-        // Aqui você pode adicionar animação, drop, efeitos etc.
-        Debug.Log(gameObject.name + " morreu!");
-        Destroy(gameObject);
-    }
+{
+    // verifica se este é o último inimigo antes de destruir
+    int count = FindObjectsOfType<EnemyHealth>().Length;
+    bool lastOne = count <= 1;
+
+    Destroy(gameObject);
+
+    if (lastOne)
+        GameManager.Instance.EndGame(true);
+}
+
 }
