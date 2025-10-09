@@ -451,7 +451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioActions
   jumpSFX: {fileID: 8300000, guid: 4b50fa7c6c9d0ca4fbc6d74dcfc90b43, type: 3}
-  attackSFX: {fileID: 8300000, guid: 2186d073e93b5b94cb661fb647cdf11b, type: 3}
+  attackSFX: {fileID: 8300000, guid: 305df9d5df382b442b72964def3eeae1, type: 3}
 --- !u!82 &60924951
 AudioSource:
   m_ObjectHideFlags: 0

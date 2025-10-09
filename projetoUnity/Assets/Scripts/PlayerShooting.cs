@@ -6,12 +6,14 @@ public class PlayerShooting : MonoBehaviour
     public Transform firePoint;       // Objeto que aponta para o mouse
     public float bulletSpeed = 10f;
     public float muzzleOffset = 0.25f; // distância extra à frente do cano
+    private AudioActions audioActions;  // Refer�ncia para tocar sons
 
     Camera cam;
 
     private void Awake()
     {
         cam = Camera.main;
+        audioActions = GetComponent<AudioActions>();
     }
 
     void Update()
@@ -19,11 +21,13 @@ public class PlayerShooting : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) // Clique esquerdo do mouse
         {
             Shoot();
+            audioActions?.PlayAttack();
         }
     }
 
     void Shoot()
     {
+        
         // Direção até o mouse
         Vector3 mouseWorld = cam.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dir = ((Vector2)(mouseWorld - firePoint.position)).normalized;
